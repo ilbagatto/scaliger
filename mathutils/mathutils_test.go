@@ -1,4 +1,4 @@
-package scaliger
+package mathutils
 
 import "testing"
 

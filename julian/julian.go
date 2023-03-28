@@ -1,4 +1,4 @@
-package scaliger
+package julian
 
 // The main purpose is to convert between civil dates and Julian dates.
 // Julian date (JD) is the number of days elapsed since mean UT noon of
@@ -7,9 +7,13 @@ package scaliger
 
 import (
 	"math"
+
+	"github.com/skrushinsky/scaliger/mathutils"
 )
 
-// Civil calendar date, usually Gregorian
+// Civil calendar date, usually Gregorian.
+// Time is represented by fractional part of a day.
+// For example, 7h30m UT is `(7 + 30 / 60) / 24 = 0.3125`.
 type CivilDate struct {
 	year  int     // a year, astronomical, negative for BC dates
 	month int     // a month number, 1-12
@@ -53,11 +57,11 @@ func CivilToJulian(date CivilDate) float64 {
 
 	var a, b float64
 	if isGregorian(date) {
-		a = Fix(y / 100)
-		b = 2 - a + Fix(a/4)
+		a = mathutils.Fix(y / 100)
+		b = 2 - a + mathutils.Fix(a/4)
 	}
 
-	return b + Fix(365.25*y-t) + Fix(30.6001*(m+1)) + date.date + 1720994.5
+	return b + mathutils.Fix(365.25*y-t) + mathutils.Fix(30.6001*(m+1)) + date.date + 1720994.5
 }
 
 // Converts [jd], number of Julian days into the calendar date.
@@ -66,17 +70,17 @@ func JulianToCivil(jd float64) CivilDate {
 
 	var b float64
 	if i > 2299160 {
-		a := Fix((i - 1867216.25) / 36524.25)
-		b = i + 1 + a - Fix(a/4)
+		a := mathutils.Fix((i - 1867216.25) / 36524.25)
+		b = i + 1 + a - mathutils.Fix(a/4)
 	} else {
 		b = i
 	}
 	c := b + 1524
-	d := Fix((c - 122.1) / 365.25)
-	e := Fix(365.25 * d)
-	g := Fix((c - e) / 30.6001)
+	d := mathutils.Fix((c - 122.1) / 365.25)
+	e := mathutils.Fix(365.25 * d)
+	g := mathutils.Fix((c - e) / 30.6001)
 
-	da := c - e + f - Fix(30.6001*g)
+	da := c - e + f - mathutils.Fix(30.6001*g)
 	var mo float64
 	if g < 13.5 {
 		mo = g - 1

@@ -1,4 +1,4 @@
-package scaliger
+package mathutils
 
 // Core mathematical functions for astronomical calculations.
 

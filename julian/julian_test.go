@@ -1,18 +1,20 @@
-package scaliger
+package julian
 
 import (
 	"testing"
+
+	"github.com/skrushinsky/scaliger/mathutils"
 )
 
 func equalDates(a, b CivilDate) bool {
-	return a.year == b.year && a.month == b.month && AlmostEqual(a.date, b.date, 1e-6)
+	return a.year == b.year && a.month == b.month && mathutils.AlmostEqual(a.date, b.date, 1e-6)
 }
 
 func TestCivilToJulianAfterGregorian(t *testing.T) {
 	date := CivilDate{year: 2010, month: 1, date: 1.0}
 	exp := 2455197.5
 	got := CivilToJulian(date)
-	if !AlmostEqual(got, exp, 1e-6) {
+	if !mathutils.AlmostEqual(got, exp, 1e-6) {
 		t.Errorf("Expected: %f, got: %f", exp, got)
 	}
 }
@@ -21,7 +23,7 @@ func TestCivilToJulianBeforeGregorian(t *testing.T) {
 	date := CivilDate{year: 837, month: 4, date: 10.3}
 	exp := 2026871.8
 	got := CivilToJulian(date)
-	if !AlmostEqual(got, exp, 1e-6) {
+	if !mathutils.AlmostEqual(got, exp, 1e-6) {
 		t.Errorf("Expected: %f, got: %f", exp, got)
 	}
 }
@@ -30,7 +32,7 @@ func TestCivilToJulianBC(t *testing.T) {
 	date := CivilDate{year: -1000, month: 7, date: 12.5}
 	exp := 1356001.0
 	got := CivilToJulian(date)
-	if !AlmostEqual(got, exp, 1e-6) {
+	if !mathutils.AlmostEqual(got, exp, 1e-6) {
 		t.Errorf("Expected: %f, got: %f", exp, got)
 	}
 }
