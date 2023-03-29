@@ -96,3 +96,8 @@ func JulianToCivil(jd float64) CivilDate {
 
 	return CivilDate{int(ye), int(mo), da}
 }
+
+// Given number of Julian days, calculates JD at Greenwich midnight.
+func JulianMidnight(jd float64) float64 {
+	return math.Floor(jd-0.5) + 0.5
+}

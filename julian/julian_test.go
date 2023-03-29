@@ -63,3 +63,43 @@ func TestJulianToCivilBC(t *testing.T) {
 		t.Errorf("Expected: %d-%d-%f, got: %d-%d-%f", exp.year, exp.month, exp.date, got.year, got.month, got.date)
 	}
 }
+
+func TestJulianMidnightBeforeNoon(t *testing.T) {
+	exp := 2438792.5
+	got := JulianMidnight(2438792.99)
+	if !mathutils.AlmostEqual(got, exp, 1e-6) {
+		t.Errorf("Expected: %f, got: %f", exp, got)
+	}
+}
+
+func TestJulianMidnightAfterNoon(t *testing.T) {
+	exp := 2438792.5
+	got := JulianMidnight(2438793.3)
+	if !mathutils.AlmostEqual(got, exp, 1e-6) {
+		t.Errorf("Expected: %f, got: %f", exp, got)
+	}
+}
+
+func TestJulianMidnightPrevDayBeforeMidnight(t *testing.T) {
+	exp := 2438791.5
+	got := JulianMidnight(2438792.4)
+	if !mathutils.AlmostEqual(got, exp, 1e-6) {
+		t.Errorf("Expected: %f, got: %f", exp, got)
+	}
+}
+
+func TestJulianMidnightPrevDayBeforeNoon(t *testing.T) {
+	exp := 2438791.5
+	got := JulianMidnight(2438791.9)
+	if !mathutils.AlmostEqual(got, exp, 1e-6) {
+		t.Errorf("Expected: %f, got: %f", exp, got)
+	}
+}
+
+func TestJulianMidnightNextDayBeforeNoon(t *testing.T) {
+	exp := 2438793.5
+	got := JulianMidnight(2438793.6)
+	if !mathutils.AlmostEqual(got, exp, 1e-6) {
+		t.Errorf("Expected: %f, got: %f", exp, got)
+	}
+}
