@@ -10,6 +10,6 @@ func TestAlmostEqualPositive(t *testing.T) {
 
 func TestAlmostEqualNegative(t *testing.T) {
 	if AlmostEqual(10.123457, 10.123456, 1e-6) {
-		t.Errorf("Numbers should be considered equal")
+		t.Errorf("Numbers should not be considered equal")
 	}
 }
