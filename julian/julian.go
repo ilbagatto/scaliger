@@ -7,8 +7,6 @@ package julian
 
 import (
 	"math"
-
-	"github.com/skrushinsky/scaliger/mathutils"
 )
 
 // Civil calendar date, usually Gregorian.
@@ -57,11 +55,11 @@ func CivilToJulian(date CivilDate) float64 {
 
 	var a, b float64
 	if isGregorian(date) {
-		a = mathutils.Fix(y / 100)
-		b = 2 - a + mathutils.Fix(a/4)
+		a = math.Trunc(y / 100)
+		b = 2 - a + math.Trunc(a/4)
 	}
 
-	return b + mathutils.Fix(365.25*y-t) + mathutils.Fix(30.6001*(m+1)) + date.date + 1720994.5
+	return b + math.Trunc(365.25*y-t) + math.Trunc(30.6001*(m+1)) + date.date + 1720994.5
 }
 
 // Converts [jd], number of Julian days into the calendar date.
@@ -70,17 +68,17 @@ func JulianToCivil(jd float64) CivilDate {
 
 	var b float64
 	if i > 2299160 {
-		a := mathutils.Fix((i - 1867216.25) / 36524.25)
-		b = i + 1 + a - mathutils.Fix(a/4)
+		a := math.Trunc((i - 1867216.25) / 36524.25)
+		b = i + 1 + a - math.Trunc(a/4)
 	} else {
 		b = i
 	}
 	c := b + 1524
-	d := mathutils.Fix((c - 122.1) / 365.25)
-	e := mathutils.Fix(365.25 * d)
-	g := mathutils.Fix((c - e) / 30.6001)
+	d := math.Trunc((c - 122.1) / 365.25)
+	e := math.Trunc(365.25 * d)
+	g := math.Trunc((c - e) / 30.6001)
 
-	da := c - e + f - mathutils.Fix(30.6001*g)
+	da := c - e + f - math.Trunc(30.6001*g)
 	var mo float64
 	if g < 13.5 {
 		mo = g - 1
