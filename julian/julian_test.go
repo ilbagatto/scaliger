@@ -6,12 +6,8 @@ import (
 	"github.com/skrushinsky/scaliger/mathutils"
 )
 
-func equalDates(a, b CivilDate) bool {
-	return a.year == b.year && a.month == b.month && mathutils.AlmostEqual(a.date, b.date, 1e-6)
-}
-
 func TestCivilToJulianAfterGregorian(t *testing.T) {
-	date := CivilDate{year: 2010, month: 1, date: 1.0}
+	date := CivilDate{Year: 2010, Month: 1, Day: 1.0}
 	exp := 2455197.5
 	got := CivilToJulian(date)
 	if !mathutils.AlmostEqual(got, exp, 1e-6) {
@@ -20,7 +16,7 @@ func TestCivilToJulianAfterGregorian(t *testing.T) {
 }
 
 func TestCivilToJulianBeforeGregorian(t *testing.T) {
-	date := CivilDate{year: 837, month: 4, date: 10.3}
+	date := CivilDate{Year: 837, Month: 4, Day: 10.3}
 	exp := 2026871.8
 	got := CivilToJulian(date)
 	if !mathutils.AlmostEqual(got, exp, 1e-6) {
@@ -29,7 +25,7 @@ func TestCivilToJulianBeforeGregorian(t *testing.T) {
 }
 
 func TestCivilToJulianBC(t *testing.T) {
-	date := CivilDate{year: -1000, month: 7, date: 12.5}
+	date := CivilDate{Year: -1000, Month: 7, Day: 12.5}
 	exp := 1356001.0
 	got := CivilToJulian(date)
 	if !mathutils.AlmostEqual(got, exp, 1e-6) {
@@ -39,28 +35,28 @@ func TestCivilToJulianBC(t *testing.T) {
 
 func TestJulianToCivilAfterGregorian(t *testing.T) {
 	jd := 2455197.5
-	exp := CivilDate{year: 2010, month: 1, date: 1.0}
+	exp := CivilDate{Year: 2010, Month: 1, Day: 1.0}
 	got := JulianToCivil(jd)
-	if !equalDates(got, exp) {
-		t.Errorf("Expected: %d-%d-%f, got: %d-%d-%f", exp.year, exp.month, exp.date, got.year, got.month, got.date)
+	if !EqualDates(got, exp) {
+		t.Errorf("Expected: %d-%d-%f, got: %d-%d-%f", exp.Year, exp.Month, exp.Day, got.Year, got.Month, got.Day)
 	}
 }
 
 func TestJulianToCivilBeforeGregorian(t *testing.T) {
 	jd := 2026871.8
-	exp := CivilDate{year: 837, month: 4, date: 10.3}
+	exp := CivilDate{Year: 837, Month: 4, Day: 10.3}
 	got := JulianToCivil(jd)
-	if !equalDates(got, exp) {
-		t.Errorf("Expected: %d-%d-%f, got: %d-%d-%f", exp.year, exp.month, exp.date, got.year, got.month, got.date)
+	if !EqualDates(got, exp) {
+		t.Errorf("Expected: %d-%d-%f, got: %d-%d-%f", exp.Year, exp.Month, exp.Day, got.Year, got.Month, got.Day)
 	}
 }
 
 func TestJulianToCivilBC(t *testing.T) {
 	jd := 1356001.0
-	exp := CivilDate{year: -1000, month: 7, date: 12.5}
+	exp := CivilDate{Year: -1000, Month: 7, Day: 12.5}
 	got := JulianToCivil(jd)
-	if !equalDates(got, exp) {
-		t.Errorf("Expected: %d-%d-%f, got: %d-%d-%f", exp.year, exp.month, exp.date, got.year, got.month, got.date)
+	if !EqualDates(got, exp) {
+		t.Errorf("Expected: %d-%d-%f, got: %d-%d-%f", exp.Year, exp.Month, exp.Day, got.Year, got.Month, got.Day)
 	}
 }
 
@@ -101,5 +97,29 @@ func TestJulianMidnightNextDayBeforeNoon(t *testing.T) {
 	got := JulianMidnight(2438793.6)
 	if !mathutils.AlmostEqual(got, exp, 1e-6) {
 		t.Errorf("Expected: %f, got: %f", exp, got)
+	}
+}
+
+func TestJulianDateZero(t *testing.T) {
+	exp := 2455196.5
+	got := JulianDateZero(2010)
+	if !mathutils.AlmostEqual(got, exp, 1e-6) {
+		t.Errorf("Expected: %f, got: %f", exp, got)
+	}
+}
+
+func TestExtractUTCBeforeNoon(t *testing.T) {
+	exp := 11.76
+	got := ExtractUTC(2438792.99)
+	if !mathutils.AlmostEqual(got, exp, 0.2) {
+		t.Errorf("Expected: %.02f, got: %.02f", exp, got)
+	}
+}
+
+func TestExtractUTCAfterNoon(t *testing.T) {
+	exp := 14.56
+	got := ExtractUTC(2438792.5 + 0.606667)
+	if !mathutils.AlmostEqual(got, exp, 0.2) {
+		t.Errorf("Expected: %.02f, got: %.02f", exp, got)
 	}
 }

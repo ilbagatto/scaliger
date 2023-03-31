@@ -9,29 +9,20 @@ import (
 	"math"
 )
 
-// Civil calendar date, usually Gregorian.
-// Time is represented by fractional part of a day.
-// For example, 7h30m UT is `(7 + 30 / 60) / 24 = 0.3125`.
-type CivilDate struct {
-	year  int     // a year, astronomical, negative for BC dates
-	month int     // a month number, 1-12
-	date  float64 // date which fractional part represents hours
-}
-
 func isGregorian(date CivilDate) bool {
-	if date.year > 1582 {
+	if date.Year > 1582 {
 		return true
 	}
-	if date.year < 1582 {
+	if date.Year < 1582 {
 		return false
 	}
-	if date.month > 10 {
+	if date.Month > 10 {
 		return true
 	}
-	if date.month < 10 {
+	if date.Month < 10 {
 		return false
 	}
-	if date.date > 10 {
+	if date.Day > 10 {
 		return true
 	}
 	return false
@@ -40,16 +31,16 @@ func isGregorian(date CivilDate) bool {
 // Converts calendar date into Julian days.
 func CivilToJulian(date CivilDate) float64 {
 	var y, m float64
-	if date.month > 2 {
-		y = float64(date.year)
-		m = float64(date.month)
+	if date.Month > 2 {
+		y = float64(date.Year)
+		m = float64(date.Month)
 	} else {
-		y = float64(date.year) - 1
-		m = float64(date.month) + 12
+		y = float64(date.Year) - 1
+		m = float64(date.Month) + 12
 	}
 
 	var t float64
-	if date.year < 0 {
+	if date.Year < 0 {
 		t = 0.75
 	}
 
@@ -59,7 +50,7 @@ func CivilToJulian(date CivilDate) float64 {
 		b = 2 - a + math.Trunc(a/4)
 	}
 
-	return b + math.Trunc(365.25*y-t) + math.Trunc(30.6001*(m+1)) + date.date + 1720994.5
+	return b + math.Trunc(365.25*y-t) + math.Trunc(30.6001*(m+1)) + date.Day + 1720994.5
 }
 
 // Converts [jd], number of Julian days into the calendar date.
@@ -92,10 +83,23 @@ func JulianToCivil(jd float64) CivilDate {
 		ye = d - 4715
 	}
 
-	return CivilDate{int(ye), int(mo), da}
+	return CivilDate{Year: int(ye), Month: int(mo), Day: da}
 }
 
 // Given number of Julian days, calculates JD at Greenwich midnight.
 func JulianMidnight(jd float64) float64 {
 	return math.Floor(jd-0.5) + 0.5
+}
+
+// Julian Day corresponding to January 0.0 of a given year
+func JulianDateZero(year int) float64 {
+	y := float64(year - 1)
+	a := math.Trunc(y / 100)
+	return math.Trunc(365.25*y) - a + math.Trunc(a/4) + 1721424.5
+}
+
+// Converts fractional part of a Julian Date to decimal hours.
+func ExtractUTC(jd float64) float64 {
+	_, f := math.Modf(jd - 0.5)
+	return math.Abs(f) * 24.0
 }
