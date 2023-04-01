@@ -27,3 +27,15 @@ func ReduceHours(hours float64) float64 {
 	}
 	return x
 }
+
+// Calculates polynome: `a1 + a2*t + a3*t*t + a4*t*t*t...`
+// [t] s a number of Julian centuries elapsed since 1900, Jan 0.5
+// [terms] is a list of terms
+func Polynome(t float64, terms ...float64) float64 {
+	res := 0.0
+	for i, k := range terms {
+		p := math.Pow(t, float64(i))
+		res += k * p
+	}
+	return res
+}

@@ -100,6 +100,7 @@ func JulianDateZero(year int) float64 {
 
 // Converts fractional part of a Julian Date to decimal hours.
 func ExtractUTC(jd float64) float64 {
-	_, f := math.Modf(jd - 0.5)
-	return math.Abs(f) * 24.0
+	// _, f := math.Modf(jd - 0.5)
+	// return math.Abs(f) * 24.0
+	return (jd - JulianMidnight(jd)) * 24
 }

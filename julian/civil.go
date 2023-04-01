@@ -15,14 +15,18 @@ type CivilDate struct {
 	Day   float64 // date which fractional part represents hours
 }
 
+// Compares two dates.
 func EqualDates(a, b CivilDate) bool {
 	return a.Year == b.Year && a.Month == b.Month && mathutils.AlmostEqual(a.Day, b.Day, 1e-6)
 }
 
+// Is given year a leap year?
+// [year] is the astronomical year.
 func IsLeapYear(year int) bool {
 	return (year%4 == 0) && ((year%100 != 0) || (year%400 == 0))
 }
 
+// Number of days in the year up to a particular date.
 func DayOfYear(date CivilDate) int {
 	var k float64
 	if IsLeapYear(date.Year) {
