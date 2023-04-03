@@ -65,3 +65,7 @@ func TestLongPolynome(t *testing.T) {
 		t.Errorf("Expected: %f, got: %f", exp, got)
 	}
 }
+
+func TestFrac360(t *testing.T) {
+
+}

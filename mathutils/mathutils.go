@@ -4,6 +4,9 @@ package mathutils
 
 import "math"
 
+const _DEG_RAD = math.Pi / 180
+const _RAD_DEG = 180 / math.Pi
+
 // Compares two floats with a given precision.
 func AlmostEqual(a, b, threshold float64) bool {
 	return math.Abs(a-b) <= threshold
@@ -38,4 +41,19 @@ func Polynome(t float64, terms ...float64) float64 {
 		res += k * p
 	}
 	return res
+}
+
+// Converts arc-degrees to radians
+func Radians(deg float64) float64 {
+	return deg * _DEG_RAD
+}
+
+// Converts radians to arc-degrees
+func Degrees(rad float64) float64 {
+	return rad * _RAD_DEG
+}
+
+// Used with polinomial function for better accuracy.
+func Frac360(x float64) float64 {
+	return Frac(x) * 360
 }
