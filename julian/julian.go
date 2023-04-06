@@ -9,6 +9,12 @@ import (
 	"math"
 )
 
+const SEC_PER_DAY = 24 * 60 * 60
+const DAYS_PER_SEC = 1.0 / SEC_PER_DAY // How many days in a second?
+const DAYS_PER_CENT = 36525
+const J2000 = 2451545.0 // Julian day for 2000 Jan. 1.5
+const J1900 = 2415020.0 // Julian day for 1900 Jan. 0.5
+
 func isGregorian(date CivilDate) bool {
 	if date.Year > 1582 {
 		return true

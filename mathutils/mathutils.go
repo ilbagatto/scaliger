@@ -55,5 +55,9 @@ func Degrees(rad float64) float64 {
 
 // Used with polinomial function for better accuracy.
 func Frac360(x float64) float64 {
-	return Frac(x) * 360
+	f := Frac(x) * 360
+	if f < 360 {
+		f += 360
+	}
+	return f
 }

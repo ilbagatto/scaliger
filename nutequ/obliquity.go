@@ -7,3 +7,9 @@ func MeanObliquity(jd float64) float64 {
 	c := (((-0.00181*t)+0.0059)*t + 46.845) * t
 	return 23.45229444 - (c / 3600)
 }
+
+// Given [jd], number of Julian days, and [deps], nutation in ecliptic obliquity,
+// in degrees, calculate **obliquity of ecliptic** in degrees.
+func TrueObliquity(jd, deps float64) float64 {
+	return MeanObliquity(jd) + deps
+}

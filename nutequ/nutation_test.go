@@ -3,6 +3,7 @@ package nutequ
 import (
 	"testing"
 
+	"github.com/skrushinsky/scaliger/julian"
 	"github.com/skrushinsky/scaliger/mathutils"
 )
 
@@ -27,6 +28,21 @@ var nutCases = [...]_NutTestCase{
 		jd:   2443825.69, // 1978 Nov 17
 		dpsi: -9.195562346652888e-04,
 		deps: -2.635113483663831e-03,
+	},
+	{
+		jd:   julian.CivilToJulian(julian.CivilDate{Year: 1989, Month: 2, Day: 4}),
+		dpsi: 0.0023055555555555555,
+		deps: 0.0022944444444444444,
+	},
+	{
+		jd:   julian.CivilToJulian(julian.CivilDate{Year: 2000, Month: 1, Day: 1.5}),
+		dpsi: -0.003877777777777778,
+		deps: -0.0016,
+	},
+	{
+		jd:   julian.CivilToJulian(julian.CivilDate{Year: 1995, Month: 4, Day: 23}),
+		dpsi: 0.0026472222222222223,
+		deps: -0.002013888888888889,
 	},
 }
 
