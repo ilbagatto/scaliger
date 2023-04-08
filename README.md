@@ -2,20 +2,15 @@
 
 Library of date/time manipulation routines for practical astronomy.
 
-The formulae were adopted from the following sources:
-
-* Peter Duffett-Smith, "Astronomy With Your Personal Computer", Cambridge University Press, 1997
-* Jean Meeus, "Astronomical Algorithms", 2d edition, Willmann-Bell, 1998
-* J.L.Lawrence, "Celestial Calculations", The MIT Press, 2018
 
 
 - [Scaliger](#scaliger)
   - [Quick Start](#quick-start)
-  - [Usage](#usage)
-    - [Julian Date — julian package](#julian-date--julian-package)
-    - [Sidereal Time — sidereal package](#sidereal-time--sidereal-package)
-    - [Dynamic Time — deltat package](#dynamic-time--deltat-package)
-    - [Nutation and Obliquity of the ecliptic — nutequ package](#nutation-and-obliquity-of-the-ecliptic--nutequ-package)
+  - [Packages](#packages)
+    - [julian](#julian)
+    - [sidereal](#sidereal)
+    - [deltat](#deltat)
+    - [nutequ](#nutequ)
       - [Obliquity of the ecliptic](#obliquity-of-the-ecliptic)
       - [Nutation](#nutation)
   - [Caveats](#caveats)
@@ -23,6 +18,7 @@ The formulae were adopted from the following sources:
     - [Zero day](#zero-day)
     - [Gregorian calendar](#gregorian-calendar)
   - [How to contribute](#how-to-contribute)
+  - [Sources](#sources)
   - [Footnotes](#footnotes)
 
 
@@ -34,12 +30,12 @@ $ go get github.com/skrushinsky/scaliger
 
 ```
 
-## Usage
+## Packages
 
-### Julian Date — julian package
+### julian
 
-Most of the astronomical calculations are based on so called **Julian date (JD)**, which is
-the number of days elapsed since mean UT noon of **January 1st 4713 BC**.
+Most of the astronomical calculations are based on so called *Julian date*, which is
+the number of days elapsed since mean UT noon of January 1st 4713 BC.
 
 `CivilToJulian(date CivilDate) float64` converts calendar date into Julian days.
 
@@ -47,7 +43,7 @@ the number of days elapsed since mean UT noon of **January 1st 4713 BC**.
 date := CivilDate{Year: 837, Month: 4, Day: 10.3}
 got := CivilToJulian(date) // 2026871.8
 ```
-The calendar date is represented by `CivilDate` structure from the same package.
+The calendar date is represented by `CivilDate` structure.
 
 
 `JulianToCivil(jd float64) CivilDate` converts Julian days into the calendar date.
@@ -61,12 +57,12 @@ Other utilitity functions from the package are mostly used internally. Please, s
 
 
 
-### Sidereal Time — sidereal package
+### sidereal
 
-**Sidereal Time** is reckoned by the daily transit of a fixed point in space (fixed with respect
+*Sidereal Time* is reckoned by the daily transit of a fixed point in space (fixed with respect
 to the distant stars), 24 hours of sidereal time elapsing between a successive transits.
 
-`JulianToSidereal(jd float64, options SiderealOptions) float64` Converts Julian date to
+`JulianToSidereal(jd float64, options SiderealOptions) float64` converts Julian date to
 Sidereal Time.
 
 
@@ -84,12 +80,12 @@ type SiderealOptions struct {
 	Dpsi float64 // nutation in longitude, degrees
 }
 ```
-If geographical longitude (`Lng`) is initialized, the function calculates **Local Sidereal Time**.
-Without it **Greenwich Sidereal Time**[^1].
+If geographical longitude (`Lng`) is initialized, the function calculates *Local Sidereal Time*.
+Without it *Greenwich Sidereal Time*[^1].
 
 If obliquity of the ecliptic, `Eps`, and nutation in longitude, `Dpsi` are provided, then
-the result is **apparent Sidereal Time**, or the Greenwich hour angle of the *true vernal equinox*.
-For **Mean Sidereal Time**, referred to the *mean vernal point* [^2], leave these fields empty:
+the result is *apparent Sidereal Time*, or the Greenwich hour angle of the *true vernal equinox*.
+For *Mean Sidereal Time*, referred to the *mean vernal point* [^2], leave these fields empty:
 
 ```go
 opts := SiderealOptions{Lng: 37.5833}
@@ -99,9 +95,9 @@ opts := SiderealOptions{Lng: 37.5833}
 To calculate *obliquity of the ecliptic* and *nutation*, use nutequ package.
 
 
-### Dynamic Time — deltat package
+### deltat
 
-**DeltaT** indicates the difference between *UTC* (Greenwich Coordinated Time) and *TDT*
+*DeltaT* indicates the difference between *UTC* (Greenwich Coordinated Time) and *TDT*
 (Terrestrial Dynamic Time), which used to be called *'Ephemeris time'* in the last
 century. While *UTC* is not a uniform time scale (it is occasionally adjusted, due to irregularities
 in the Earth's rotation), *TDT* is a uniform time scale which is needed as an argument for
@@ -117,11 +113,11 @@ dt := DeltaT(jd) // 93.81 seconds
 jde := jd + dt / 86400 // Dynamic time.
 ```
 
-### Nutation and Obliquity of the ecliptic — nutequ package
+### nutequ
 
 #### Obliquity of the ecliptic
 
-**Obliquity of the ecliptic** is the angle between the eauator and the ecliptic.
+*Obliquity of the ecliptic* is the angle between the eauator and the ecliptic.
 
 To calculate *Mean Obliquity*, angle which the ecliptic makes with the mean equator,
 use `MeanObliquity(jd float64) float64` function, where **jd** is Juliuan Date.
@@ -176,6 +172,14 @@ suggestions are welcome.
 
 You may follow the standard Github procedures or, in case you are not comfortable with them, just send your suggestions
 to the author by email.
+
+## Sources
+
+The formulae were adopted from the following sources:
+
+* _Peter Duffett-Smith, "Astronomy With Your Personal Computer", Cambridge University Press, 1997_
+* _Jean Meeus, "Astronomical Algorithms", 2d edition, Willmann-Bell, 1998_
+* _J.L.Lawrence, "Celestial Calculations", The MIT Press, 2018_
 
 
 ## Footnotes
