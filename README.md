@@ -214,10 +214,7 @@ The formulae were adopted from the following sources:
 ## Footnotes
 
 [^1]: *Julian Period* 7980 years of numbered days to be used in determining time elapsed between various historical events.
-It is the product of three calendar cycles:
-```
-28 (solar cycle) × 19 (lunar cycle) × 15 (indiction cycle) = 7980 years
-```
+It is the product of three calendar cycles: `28 (solar cycle) × 19 (lunar cycle) × 15 (indiction cycle) = 7980 years`
 
 [^2]: *Greenwich Sidereal Time* — Sidereal time at the Greenwich meridian, irrelevant to the observer's
 position.
