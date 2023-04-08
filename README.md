@@ -1,8 +1,7 @@
 # Scaliger
 
-Library of date/time manipulation routines for practical astronomy.
-
-
+Library of date/time manipulation routines for practical astronomy. It is named in honor of the prominent
+classical scholar *Joseph Scaliger (1540-1609)*, who proposed the *Julian Period*[^1].
 
 - [Scaliger](#scaliger)
   - [Quick Start](#quick-start)
@@ -94,10 +93,10 @@ type SiderealOptions struct {
 ```
 
 * **Geographical longitude**, `Lng`. If initialized, the function calculates *Local Sidereal Time*.
-Without it *Greenwich Sidereal Time*[^1]
+Without it *Greenwich Sidereal Time*[^2]
 * **Obliquity of the ecliptic**, `Eps` and and **nutation in longitude**, `Dpsi`. If provided, then
 the result is *apparent Sidereal Time*, or the Greenwich hour angle of the *true vernal equinox*.
-For *Mean Sidereal Time*, referred to the *mean vernal point* [^2], leave these fields empty:
+For *Mean Sidereal Time*, referred to the *mean vernal point* [^3], leave these fields empty:
 
 ```go
 opts := SiderealOptions{Lng: 37.5833}
@@ -214,7 +213,13 @@ The formulae were adopted from the following sources:
 
 ## Footnotes
 
-[^1]: *Greenwich Sidereal Time* — Sidereal time at the Greenwich meridian, irrelevant to the observer's
+[^1]: *Julian Period* 7980 years of numbered days to be used in determining time elapsed between various historical events.
+It is the product of three calendar cycles:
+```
+28 (solar cycle) × 19 (lunar cycle) × 15 (indiction cycle) = 7980 years
+```
+
+[^2]: *Greenwich Sidereal Time* — Sidereal time at the Greenwich meridian, irrelevant to the observer's
 position.
 
-[^2]: *Mean vernal point* — intersection of the ecliptic of the date with the mean equator of the date.
+[^23]: *Mean vernal point* — intersection of the ecliptic of the date with the mean equator of the date.
