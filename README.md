@@ -63,11 +63,11 @@ date := JulianToCivil(2455197.5) // CivilDate{Year: 2010, Month: 1, Day: 1.0}
 Other utilitity functions from the package are mostly used internally.
 
 * `JulianMidnight(jd float64) float64` calculates JD at Greenwich midnight
-* `JulianDateZero(year int) float64` calculates JD corresponding to January 0.0 of a given year
+* `JulianDateZero(year int) float64` calculates JD corresponding to the [Zero day](#zero-day)
 * `ExtractUTC(jd float64) float64` converts fractional part of a JD to decimal hours (UTC)
-* `EqualDates(a, b CivilDate) bool` compares two Civil dates
+* `EqualDates(a, b CivilDate) bool` compares two dates
 * `IsLeapYear(year int) bool` returns `true` if given year a leap year
-* `DayOfYear(date CivilDate) int`returns number of days in the year up to a particular date.
+* `DayOfYear(date CivilDate) int` returns number of days in the year up to a particular date.
 
 ### sidereal
 
@@ -92,10 +92,10 @@ type SiderealOptions struct {
 	Dpsi float64 // nutation in longitude, degrees
 }
 ```
-If geographical longitude (`Lng`) is initialized, the function calculates *Local Sidereal Time*.
-Without it *Greenwich Sidereal Time*[^1].
 
-If obliquity of the ecliptic, `Eps`, and nutation in longitude, `Dpsi` are provided, then
+* **Geographical longitude**, `Lng`. If initialized, the function calculates *Local Sidereal Time*.
+Without it *Greenwich Sidereal Time*[^1]
+* **Obliquity of the ecliptic**, `Eps` and and **nutation in longitude**, `Dpsi`. If provided, then
 the result is *apparent Sidereal Time*, or the Greenwich hour angle of the *true vernal equinox*.
 For *Mean Sidereal Time*, referred to the *mean vernal point* [^2], leave these fields empty:
 
