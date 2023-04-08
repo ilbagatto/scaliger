@@ -222,4 +222,4 @@ It is the product of three calendar cycles:
 [^2]: *Greenwich Sidereal Time* — Sidereal time at the Greenwich meridian, irrelevant to the observer's
 position.
 
-[^23]: *Mean vernal point* — intersection of the ecliptic of the date with the mean equator of the date.
+[^3]: *Mean vernal point* — intersection of the ecliptic of the date with the mean equator of the date.
