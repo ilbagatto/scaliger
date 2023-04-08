@@ -160,10 +160,10 @@ Mathematical utilities.
 
 * `AlmostEqual(a, b, threshold float64)` compares two floating point numbera with a given precision.
 * `Frac(x float64) float64` fractional part of a number.
-* `ReduceHours(hours float64) float64` reduces hours to range `0 >= x < 24`
-* `Polynome(t float64, terms ...float64) float64` calculates polynome: `a1 + a2*t + a3*t*t + a4*t*t*t...`
-* `Radians(deg float64) float64` converts arc-degrees to radians
-* `Degrees(rad float64) float64` converts radians to arc-degrees
+* `ReduceHours(hours float64) float64` reduces hours to range `0 >= x < 24`.
+* `Polynome(t float64, terms ...float64) float64` calculates polynome: `a1 + a2*t + a3*t*t + a4*t*t*t...`.
+* `Radians(deg float64) float64` converts arc-degrees to radians.
+* `Degrees(rad float64) float64` converts radians to arc-degrees.
 * `Frac360(x float64) float64` reduces arc-degrees, much like `ReduceHours`, used with polinomial function for better accuracy.
 
 Please, see the [source code](/skrushinsky/scaliger/blob/master/mathutils/mathutils.go) for details.
