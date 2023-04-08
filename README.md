@@ -13,6 +13,7 @@ Library of date/time manipulation routines for practical astronomy.
     - [nutequ](#nutequ)
       - [Obliquity of the ecliptic](#obliquity-of-the-ecliptic)
       - [Nutation](#nutation)
+    - [mathutils](#mathutils)
   - [Caveats](#caveats)
     - [Civil vs. Astronomical year](#civil-vs-astronomical-year)
     - [Zero day](#zero-day)
@@ -34,8 +35,8 @@ $ go get github.com/skrushinsky/scaliger
 
 ### julian
 
-Most of the astronomical calculations are based on so called *Julian date*, which is
-the number of days elapsed since mean UT noon of January 1st 4713 BC.
+Most of the astronomical calculations are based on so called *Julian date* (JD),
+which is the number of days elapsed since mean UT noon of January 1st 4713 BC.
 
 `CivilToJulian(date CivilDate) float64` converts calendar date into Julian days.
 
@@ -60,8 +61,14 @@ jd := 2455197.5
 date := JulianToCivil(2455197.5) // CivilDate{Year: 2010, Month: 1, Day: 1.0}
 ```
 
-Other utilitity functions from the package are mostly used internally. Please, see the API docs.
+Other utilitity functions from the package are mostly used internally.
 
+* `JulianMidnight(jd float64) float64` calculates JD at Greenwich midnight
+* `JulianDateZero(year int) float64` calculates JD corresponding to January 0.0 of a given year
+* `ExtractUTC(jd float64) float64` converts fractional part of a JD to decimal hours (UTC)
+* `EqualDates(a, b CivilDate) bool` compares two Civil dates
+* `IsLeapYear(year int) bool` returns `true` if given year a leap year
+* `DayOfYear(date CivilDate) int`returns number of days in the year up to a particular date.
 
 
 ### sidereal
@@ -99,7 +106,7 @@ opts := SiderealOptions{Lng: 37.5833}
 ...
 ```
 
-To calculate *obliquity of the ecliptic* and *nutation*, use nutequ package.
+To calculate *obliquity of the ecliptic* and *nutation*, use [nutequ package](#nutequ).
 
 
 ### deltat
@@ -110,9 +117,9 @@ century. While *UTC* is not a uniform time scale (it is occasionally adjusted, d
 in the Earth's rotation), *TDT* is a uniform time scale which is needed as an argument for
 mathematical theories of celestial movements.
 
-The exact value of the difference `DeltaT = TDT - UTC` can be deduced only from observations/
-Approximate Delta-T in seconds for a given Julian Date may be obtained by `DeltaT(jd float64) float64`
-function. To correct a date for *TDT*, simply add DeltaT seconds divided by `86400` (seconds per day).
+The exact value of the difference `DeltaT = TDT - UTC` can be deduced only from observations.
+Approximate value in seconds for a given Julian Date may be obtained by `DeltaT(jd float64) float64`
+function. To correct a *JD* for *TDT*, add DeltaT seconds divided by `86400` (seconds per day).
 
 ```go
 jd := 2459040.5  // Julian date for 2020-07-10
@@ -124,7 +131,7 @@ jde := jd + dt / 86400 // Dynamic time.
 
 #### Obliquity of the ecliptic
 
-*Obliquity of the ecliptic* is the angle between the eauator and the ecliptic.
+*Obliquity of the ecliptic* is the angle between the celestial equator and the ecliptic.
 
 To calculate *Mean Obliquity*, angle which the ecliptic makes with the mean equator,
 use `MeanObliquity(jd float64) float64` function, where **jd** is Juliuan Date.
@@ -144,6 +151,17 @@ is the *nutation in obliquity*.
  * `deps`, *nutation in obliquity*, arc-degrees
 
 
+### mathutils
+
+Mathematical utilities.
+
+* `AlmostEqual(a, b, threshold float64)` compares two floating point numbera with a given precision.
+* `Frac(x float64) float64` fractional part of a number.
+* `ReduceHours(hours float64) float64` reduces hours to range `0 >= x < 24`
+* `Polynome(t float64, terms ...float64) float64` calculates polynome: `a1 + a2*t + a3*t*t + a4*t*t*t...`
+* `Radians(deg float64) float64` converts arc-degrees to radians
+* `Degrees(rad float64) float64` converts radians to arc-degrees
+* `Frac360(x float64) float64` reduces arc-degrees, much like `ReduceHours`, used with polinomial function for better accuracy.
 
 ## Caveats
 
