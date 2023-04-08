@@ -106,6 +106,9 @@ opts := SiderealOptions{Lng: 37.5833}
 
 To calculate *obliquity of the ecliptic* and *nutation*, use [nutequ package](#nutequ).
 
+By default, all the options are zeroes which means that a call with empty options:
+`JulianToSidereal(jd, SiderealOptions{})` will return *Greenwich Mean Sidereal Time*.
+
 
 ### deltat
 
