@@ -47,8 +47,8 @@ The calendar date is represented by `CivilDate` structure.
 
 ```go
 type CivilDate struct {
-	Year  int     // a year, astronomical, negative for BC dates
-	Month int     // a month number, 1-12
+	Year  int     // year, astronomical, negative for BC dates
+	Month int     // month number, 1-12
 	Day   float64 // day, fractional part represents hours
 }
 ```

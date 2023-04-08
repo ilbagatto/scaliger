@@ -10,8 +10,8 @@ import (
 // Time is represented by fractional part of a day.
 // For example, 7h30m UT is `(7 + 30 / 60) / 24 = 0.3125`.
 type CivilDate struct {
-	Year  int     // a year, astronomical, negative for BC dates
-	Month int     // a month number, 1-12
+	Year  int     // year, astronomical, negative for BC dates
+	Month int     // month number, 1-12
 	Day   float64 // day, fractional part represents hours
 }
 
