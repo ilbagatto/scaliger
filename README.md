@@ -65,7 +65,7 @@ Other utilitity functions from the package are mostly used internally.
 * `JulianDateZero(year int) float64` calculates JD corresponding to the [Zero day](#zero-day)
 * `ExtractUTC(jd float64) float64` converts fractional part of a JD to decimal hours (UTC)
 * `EqualDates(a, b CivilDate) bool` compares two dates
-* `IsLeapYear(year int) bool` returns `true` if given year a leap year
+* `IsLeapYear(year int) bool` returns `true` if given year is a leap year
 * `DayOfYear(date CivilDate) int` returns number of days in the year up to a particular date.
 
 ### sidereal
