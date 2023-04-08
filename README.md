@@ -191,7 +191,7 @@ assumed that Gregorian calendar started at *Oct. 4, 1582*, when it was first
 adopted in several European countries. Many other countries still used the
 older Julian calendar. In Soviet Russia, for instance, Gregorian system was
 accepted on **Jan 26, 1918**. See
-[Wiki article](https://en.wikipedia.org/wiki/Gregorian_calendar#Adoption_of_the_Gregorian_Calendar)
+[Wiki article](https://en.wikipedia.org/wiki/Gregorian_calendar#Adoption_of_the_Gregorian_Calendar).
 
 
 ## How to contribute
