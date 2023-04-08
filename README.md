@@ -45,6 +45,13 @@ got := CivilToJulian(date) // 2026871.8
 ```
 The calendar date is represented by `CivilDate` structure.
 
+```go
+type CivilDate struct {
+	Year  int     // a year, astronomical, negative for BC dates
+	Month int     // a month number, 1-12
+	Day   float64 // day, fractional part represents hours
+}
+```
 
 `JulianToCivil(jd float64) CivilDate` converts Julian days into the calendar date.
 

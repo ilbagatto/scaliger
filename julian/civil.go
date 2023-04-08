@@ -12,7 +12,7 @@ import (
 type CivilDate struct {
 	Year  int     // a year, astronomical, negative for BC dates
 	Month int     // a month number, 1-12
-	Day   float64 // date which fractional part represents hours
+	Day   float64 // day, fractional part represents hours
 }
 
 // Compares two dates.
