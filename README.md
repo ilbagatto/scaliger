@@ -57,7 +57,6 @@ type CivilDate struct {
 `JulianToCivil(jd float64) CivilDate` converts Julian days into the calendar date.
 
 ```go
-jd := 2455197.5
 date := JulianToCivil(2455197.5) // CivilDate{Year: 2010, Month: 1, Day: 1.0}
 ```
 
@@ -69,7 +68,6 @@ Other utilitity functions from the package are mostly used internally.
 * `EqualDates(a, b CivilDate) bool` compares two Civil dates
 * `IsLeapYear(year int) bool` returns `true` if given year a leap year
 * `DayOfYear(date CivilDate) int`returns number of days in the year up to a particular date.
-
 
 ### sidereal
 
@@ -162,6 +160,8 @@ Mathematical utilities.
 * `Radians(deg float64) float64` converts arc-degrees to radians
 * `Degrees(rad float64) float64` converts radians to arc-degrees
 * `Frac360(x float64) float64` reduces arc-degrees, much like `ReduceHours`, used with polinomial function for better accuracy.
+
+Please, see the [source code](/skrushinsky/scaliger/blob/master/mathutils/mathutils.go) for details.
 
 ## Caveats
 
