@@ -42,10 +42,10 @@ func meanGMST(jd float64) float64 {
 
 // Converts Julian date to Sidereal Time.
 // If options contain initialized [Lng] field, then the result is  **Local Sidereal Time**.
-// Otherwise, Greenwich Sidereal TIme.
+// Otherwise, Greenwich Sidereal Time.
 //
 // If options contains initialized [Eps] and [Dpsi] fields, then the result is
-// **True Sidereal Time**. Otherwise, **Mean Sidereal Time**.
+// **apparent Sidereal Time**. Otherwise, **Mean Sidereal Time**.
 func JulianToSidereal(jd float64, options SiderealOptions) float64 {
 	dpsi := options.Dpsi * 3600                                       // degrees -> arcseconds
 	delta := (dpsi * math.Cos(mathutils.Radians(options.Eps))) / 15.0 // correction in seconds of time

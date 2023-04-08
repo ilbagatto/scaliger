@@ -1,6 +1,6 @@
 package nutequ
 
-// Given [jd], number of Julian days, calculate **obliquity of ecliptic**
+// Given [jd], number of Julian days, calculate **obliquity of the ecliptic**
 // in degrees.
 func MeanObliquity(jd float64) float64 {
 	t := (jd - 2415020) / 36525

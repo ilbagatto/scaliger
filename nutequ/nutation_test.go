@@ -44,6 +44,11 @@ var nutCases = [...]_NutTestCase{
 		dpsi: 0.0026472222222222223,
 		deps: -0.002013888888888889,
 	},
+	{
+		jd:   julian.CivilToJulian(julian.CivilDate{Year: 1965, Month: 2, Day: 1}),
+		dpsi: -0.0042774118548615766,
+		deps: 0.000425,
+	},
 }
 
 func TestNutLon(t *testing.T) {
