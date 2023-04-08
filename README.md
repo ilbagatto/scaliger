@@ -165,9 +165,7 @@ Mathematical utilities.
 * `Degrees(rad float64) float64` converts radians to arc-degrees.
 * `Frac360(x float64) float64` reduces arc-degrees, much like `ReduceHours`, used with polinomial function for better accuracy.
 
-Please, see the
-[source code]([/skrushinsky/scaliger/blob/master/mathutils/mathutils.go](https://github.com/skrushinsky/scaliger/blob/master/mathutils/mathutils.go))
-for details.
+Please, see the source code for details.
 
 ## Caveats
 
