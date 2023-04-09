@@ -157,7 +157,7 @@ is the *nutation in obliquity*.
 
 Mathematical utilities.
 
-* `AlmostEqual(a, b, threshold float64)` compares two floating point numbera with a given precision.
+* `AlmostEqual(a, b, threshold float64)` compares two floating point numbers with a given precision.
 * `Frac(x float64) float64` fractional part of a number.
 * `ReduceHours(hours float64) float64` reduces hours to range `0 >= x < 24`.
 * `Polynome(t float64, terms ...float64) float64` calculates polynome: `a1 + a2*t + a3*t*t + a4*t*t*t...`.
