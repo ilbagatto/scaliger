@@ -5,14 +5,13 @@ classical scholar *Joseph Scaliger (1540-1609)*, who proposed the *Julian Period
 
 - [Scaliger](#scaliger)
   - [Quick Start](#quick-start)
-  - [Packages](#packages)
-    - [julian](#julian)
-    - [sidereal](#sidereal)
-    - [deltat](#deltat)
-    - [nutequ](#nutequ)
-      - [Obliquity of the ecliptic](#obliquity-of-the-ecliptic)
-      - [Nutation](#nutation)
-    - [mathutils](#mathutils)
+  - [Usage](#usage)
+    - [Julian Dates](#julian-dates)
+    - [Sidereal Time](#sidereal-time)
+    - [Universal and Terrestial Dynamic Time](#universal-and-terrestial-dynamic-time)
+    - [Obliquity of the ecliptic](#obliquity-of-the-ecliptic)
+    - [Nutation](#nutation)
+    - [Mathematical utilities](#mathematical-utilities)
   - [Caveats](#caveats)
     - [Civil vs. Astronomical year](#civil-vs-astronomical-year)
     - [Zero day](#zero-day)
@@ -30,9 +29,9 @@ $ go get github.com/skrushinsky/scaliger
 
 ```
 
-## Packages
+## Usage
 
-### julian
+### Julian Dates
 
 Most of the astronomical calculations are based on so called *Julian date* (JD),
 which is the number of days elapsed since mean UT noon of January 1st 4713 BC.
@@ -68,7 +67,7 @@ Other utilitity functions from the package are mostly used internally.
 * `IsLeapYear(year int) bool` returns `true` if given year is a leap year
 * `DayOfYear(date CivilDate) int` returns number of days in the year up to a particular date.
 
-### sidereal
+### Sidereal Time
 
 *Sidereal Time* is reckoned by the daily transit of a fixed point in space (fixed with respect
 to the distant stars), 24 hours of sidereal time elapsing between a successive transits.
@@ -109,9 +108,9 @@ By default, all the options are zeroes which means that a call with empty option
 `JulianToSidereal(jd, SiderealOptions{})` will return *Greenwich Mean Sidereal Time*.
 
 
-### deltat
+### Universal and Terrestial Dynamic Time
 
-*DeltaT* indicates the difference between *UTC* (Greenwich Coordinated Time) and *TDT*
+*DeltaT* indicates the difference between *UTC* (Universal Coordinated Time) and *TDT*
 (Terrestrial Dynamic Time), which used to be called *'Ephemeris time'* in the last
 century. While *UTC* is not a uniform time scale (it is occasionally adjusted, due to irregularities
 in the Earth's rotation), *TDT* is a uniform time scale which is needed as an argument for
@@ -127,9 +126,7 @@ dt := DeltaT(jd) // 93.81 seconds
 jde := jd + dt / 86400 // Dynamic time.
 ```
 
-### nutequ
-
-#### Obliquity of the ecliptic
+### Obliquity of the ecliptic
 
 *Obliquity of the ecliptic* is the angle between the celestial equator and the ecliptic.
 
@@ -145,7 +142,7 @@ is the *nutation in obliquity*.
 
 `TrueObliquity(jd, 0)` (with zero `deps`) gives the same result as `MeanObliquity(jd)`.
 
-#### Nutation
+### Nutation
 
 `Nutation(jd float64) (dpsi float64, deps float64)` calculates
 
@@ -153,9 +150,7 @@ is the *nutation in obliquity*.
  * `deps`, *nutation in obliquity*, arc-degrees
 
 
-### mathutils
-
-Mathematical utilities.
+### Mathematical utilities
 
 * `AlmostEqual(a, b, threshold float64)` compares two floating point numbers with a given precision.
 * `Frac(x float64) float64` fractional part of a number.
@@ -165,7 +160,7 @@ Mathematical utilities.
 * `Degrees(rad float64) float64` converts radians to arc-degrees.
 * `Frac360(x float64) float64` reduces arc-degrees, much like `ReduceHours`, used with polinomial function for better accuracy.
 
-Please, see the source code for details.
+Please, see the [API docs](https://pkg.go.dev/github.com/skrushinsky/scaliger) for details.
 
 ## Caveats
 
@@ -200,7 +195,7 @@ especially if you are a native English speaker, and ending with improving the co
 suggestions are welcome.
 
 You may follow the standard Github procedures or, in case you are not comfortable with them, just send your suggestions
-to the author by email.
+to the author by other means.
 
 ## Sources
 
