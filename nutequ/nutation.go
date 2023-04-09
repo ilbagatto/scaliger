@@ -1,8 +1,7 @@
-package nutequ
-
-// Calculates the effects of nutation on the ecliptic longitude, [dpsi], and
-// on the obliquity of the ecliptic, [deps] with accuracy of about 1 arcsecond.
+// Calculates the effects of nutation on the ecliptic longitude, dpsi, and
+// on the obliquity of the ecliptic, deps with accuracy of about 1 arcsecond.
 // Source: P.Duffett-Smith, "Astronomy with Your PC", 2 edition.
+package nutequ
 
 import (
 	"math"
@@ -11,8 +10,7 @@ import (
 	"github.com/skrushinsky/scaliger/mathutils"
 )
 
-// Given a Julian Date, calculate nutation in longitude and obliquity,
-// both in arc-degrees.
+// Given a Julian Date, calculate nutation in longitude and obliquity, both in arc-degrees.
 func Nutation(jd float64) (dpsi float64, deps float64) {
 	t := (jd - julian.J1900) / julian.DAYS_PER_CENT
 	t2 := t * t

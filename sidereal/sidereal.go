@@ -1,17 +1,7 @@
-package sidereal
-
 // Converts civil time into the sidereal time.
 //
-// *Sidereal time* is reckoned by the daily transit of a fixed point in space
-// (fixed with respect to the distant stars), 24 hours of sidereal time elapsing
-// between an successive transits. The sidereal day is thus shorter than the
-// solar day by nearely 4 minutes, and although the solar and sidereal time
-// agree once a year, the difference between them grows systematically as the
-// months pass in the sense that sidereal time runs faster than solar time.
-// *Sidereal time* (ST) is used extensively by astronomers since it is the time
-// kept by the star.
-//
-// Source: *Peter Duffett-Smith, "Astronomy with your PC*". 2-d edition
+// Source: Peter Duffett-Smith, "Astronomy with your PC", 2-d edition
+package sidereal
 
 import (
 	"math"

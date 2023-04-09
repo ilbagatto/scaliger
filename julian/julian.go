@@ -1,20 +1,30 @@
-package julian
-
 // The main purpose is to convert between civil dates and Julian dates.
 // Julian date (JD) is the number of days elapsed since mean UT noon of
 // January 1st 4713 BC. This system of time measurement is widely adopted by
 // the astronomers.
 
+package julian
+
 import (
 	"math"
 )
 
+// Seconds per day
 const SEC_PER_DAY = 24 * 60 * 60
-const DAYS_PER_SEC = 1.0 / SEC_PER_DAY // How many days in a second?
-const DAYS_PER_CENT = 36525
-const J2000 = 2451545.0 // Julian day for 2000 Jan. 1.5
-const J1900 = 2415020.0 // Julian day for 1900 Jan. 0.5
 
+// Number of ays in a second
+const DAYS_PER_SEC = 1.0 / SEC_PER_DAY
+
+// Days per century
+const DAYS_PER_CENT = 36525
+
+// Julian day for 2000 Jan. 1.5
+const J2000 = 2451545.0
+
+// Julian day for 1900 Jan. 0.5
+const J1900 = 2415020.0
+
+// Dates before Oct 10, 1582 are considered non-gregorian
 func isGregorian(date CivilDate) bool {
 	if date.Year > 1582 {
 		return true
@@ -59,7 +69,7 @@ func CivilToJulian(date CivilDate) float64 {
 	return b + math.Trunc(365.25*y-t) + math.Trunc(30.6001*(m+1)) + date.Day + 1720994.5
 }
 
-// Converts [jd], number of Julian days into the calendar date.
+// Converts number of Julian days into the calendar date.
 func JulianToCivil(jd float64) CivilDate {
 	i, f := math.Modf(jd + 0.5)
 
@@ -97,16 +107,18 @@ func JulianMidnight(jd float64) float64 {
 	return math.Floor(jd-0.5) + 0.5
 }
 
-// Julian Day corresponding to January 0.0 of a given year
+// Julian Day corresponding to January 0.0 of a given year.
+//
+// Zero day is a special case of date: it indicates 12h UT of previous calendar
+// date. For instance, *1900 January 0.5* is often used instead of
+// *1899 December 31.5* to designate start of the astronomical epoch.
 func JulianDateZero(year int) float64 {
 	y := float64(year - 1)
 	a := math.Trunc(y / 100)
 	return math.Trunc(365.25*y) - a + math.Trunc(a/4) + 1721424.5
 }
 
-// Converts fractional part of a Julian Date to decimal hours.
+// Converts fractional part of a Julian Date to UTC as decimal hours.
 func ExtractUTC(jd float64) float64 {
-	// _, f := math.Modf(jd - 0.5)
-	// return math.Abs(f) * 24.0
 	return (jd - JulianMidnight(jd)) * 24
 }

@@ -1,3 +1,4 @@
+// Utilities for working with civil dates
 package julian
 
 import (
@@ -8,11 +9,16 @@ import (
 
 // Civil calendar date, usually Gregorian.
 // Time is represented by fractional part of a day.
-// For example, 7h30m UT is `(7 + 30 / 60) / 24 = 0.3125`.
+// For example,
+//
+//	7h30m UT is (7 + 30 / 60) / 24 = 0.3125.
 type CivilDate struct {
-	Year  int     // year, astronomical, negative for BC dates
-	Month int     // month number, 1-12
-	Day   float64 // day, fractional part represents hours
+	// year, astronomical, negative for BC dates
+	Year int
+	// month number, 1-12
+	Month int
+	// day, fractional part represents hours
+	Day float64
 }
 
 // Compares two dates.
@@ -20,8 +26,7 @@ func EqualDates(a, b CivilDate) bool {
 	return a.Year == b.Year && a.Month == b.Month && mathutils.AlmostEqual(a.Day, b.Day, 1e-6)
 }
 
-// Is given year a leap year?
-// [year] is the astronomical year.
+// Returns true ig given year is a leap year.
 func IsLeapYear(year int) bool {
 	return (year%4 == 0) && ((year%100 != 0) || (year%400 == 0))
 }
