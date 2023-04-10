@@ -67,5 +67,50 @@ func TestLongPolynome(t *testing.T) {
 }
 
 func TestFrac360(t *testing.T) {
+	const k = 23772.99 / 36525
+
+	var cases = [5][2]float64{
+		{31.7842235930254, 1.000021358e2},
+		{30.6653235575305, 9.999736056e1},
+		{42.3428797768338, 1.336855231e3},
+		{273.934866366267, 1.325552359e3},
+		{178.873057561472, 5.37261666700},
+	}
+
+	for _, test := range cases {
+		exp := test[0]
+		arg := test[1] * k
+		got := Frac360(arg)
+		if !AlmostEqual(got, exp, 1e-6) {
+			t.Errorf("Expected: %f, got: %f", exp, got)
+		}
+	}
+}
+
+func TestPositiveSexagesimal(t *testing.T) {
+	h, m, s := Hms(20.75833333333333)
+	if h != 20 {
+		t.Errorf("Expected: %d, got: %d", 20, h)
+	}
+	if m != 45 {
+		t.Errorf("Expected: %d, got: %d", 45, m)
+	}
+	if !AlmostEqual(s, 30, 1e-6) {
+		t.Errorf("Expected: %f, got: %f", 30.0, s)
+	}
+
+}
+
+func TestNegativeSexagesimal(t *testing.T) {
+	h, m, s := Hms(-20.75833333333333)
+	if h != -20 {
+		t.Errorf("Expected: %d, got: %d", -20, h)
+	}
+	if m != 45 {
+		t.Errorf("Expected: %d, got: %d", 45, m)
+	}
+	if !AlmostEqual(s, 30, 1e-6) {
+		t.Errorf("Expected: %f, got: %f", 30.0, s)
+	}
 
 }

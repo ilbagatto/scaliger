@@ -1,5 +1,9 @@
 // Converts civil time into the sidereal time.
 //
+// Sidereal Time is reckoned by the daily transit of a fixed point in space
+// (fixed with respect to the distant stars), 24 hours of sidereal time elapsing
+// between a successive transits.
+//
 // Source: Peter Duffett-Smith, "Astronomy with your PC", 2-d edition
 package sidereal
 
@@ -12,10 +16,14 @@ import (
 
 const SOLAR_TO_SIDEREAL = 1.002737909350795
 
+// Controls type of the result.
 type SiderealOptions struct {
-	Lng  float64 // geographical longitude, degrees, negative westwards
-	Eps  float64 // obliquity of the ecliptic, degrees
-	Dpsi float64 // nutation in longitude, degrees
+	// geographical longitude, degrees, negative westwards
+	Lng float64
+	// obliquity of the ecliptic, degrees
+	Eps float64
+	// nutation in longitude, degrees
+	Dpsi float64
 }
 
 func meanGMST(jd float64) float64 {
@@ -31,11 +39,21 @@ func meanGMST(jd float64) float64 {
 }
 
 // Converts Julian date to Sidereal Time.
-// If options contain initialized [Lng] field, then the result is  **Local Sidereal Time**.
+// If options contain initialized Lng field, then the result is Local Sidereal Time.
+//
+//	JulianToSidereal(jd, SiderealOptions{Lng: 37.5833})
+//
 // Otherwise, Greenwich Sidereal Time.
 //
-// If options contains initialized [Eps] and [Dpsi] fields, then the result is
-// **apparent Sidereal Time**. Otherwise, **Mean Sidereal Time**.
+//	JulianToSidereal(jd, SiderealOptions{})
+//
+// If options contains initialized Eps and Dpsi fields, then the result is
+// apparent Sidereal Time.
+//
+//	opts := SiderealOptions{Dpsi: -0.0043, Eps: 23.4443, Lng: 37.5833}
+//	lst := JulianToSidereal(jd, opts) // 23.0370...
+//
+// Otherwise, Mean Sidereal Time.
 func JulianToSidereal(jd float64, options SiderealOptions) float64 {
 	dpsi := options.Dpsi * 3600                                       // degrees -> arcseconds
 	delta := (dpsi * math.Cos(mathutils.Radians(options.Eps))) / 15.0 // correction in seconds of time

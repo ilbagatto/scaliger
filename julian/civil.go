@@ -1,4 +1,3 @@
-// Utilities for working with civil dates
 package julian
 
 import (

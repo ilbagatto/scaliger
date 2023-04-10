@@ -123,3 +123,19 @@ func TestExtractUTCAfterNoon(t *testing.T) {
 		t.Errorf("Expected: %.02f, got: %.02f", exp, got)
 	}
 }
+
+func TestDateStringToJulian(t *testing.T) {
+	exp := 2438792.990277778
+	got, _ := DateStringToJulian("1965-02-01T11:46:00Z")
+	if !mathutils.AlmostEqual(got, exp, 0.4) {
+		t.Errorf("Expected: %.04f, got: %.04f", exp, got)
+	}
+}
+
+func TestJulianToDateString(t *testing.T) {
+	exp := "1965-02-01T11:46:00Z"
+	got := JulianToDateString(2438792.990277778)
+	if got != exp {
+		t.Errorf("Expected: %s, got: %s", exp, got)
+	}
+}

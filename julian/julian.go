@@ -7,6 +7,9 @@ package julian
 
 import (
 	"math"
+	"time"
+
+	"github.com/skrushinsky/scaliger/mathutils"
 )
 
 // Seconds per day
@@ -121,4 +124,38 @@ func JulianDateZero(year int) float64 {
 // Converts fractional part of a Julian Date to UTC as decimal hours.
 func ExtractUTC(jd float64) float64 {
 	return (jd - JulianMidnight(jd)) * 24
+}
+
+// Given an date string, calculate Julian Date.
+//
+// The date must be in RFC3339 format without time zone offset, i.e.:
+//
+//	jd, _ := DateStringToJulian("2006-01-02T15:04:05Z")
+func DateStringToJulian(date string) (float64, error) {
+	t, err := time.Parse(time.RFC3339, date)
+	if err != nil {
+		return 0, err
+	}
+	ut := float64(t.Hour()) + float64(t.Minute())/60
+	jd := CivilToJulian(CivilDate{Year: t.Year(), Month: int(t.Month()), Day: float64(t.Day()) + ut/24})
+	return jd, nil
+}
+
+// Given Julian Date return RFC-3339 formatted date string.
+func JulianToDateString(jd float64) string {
+	civil := JulianToCivil(jd)
+
+	var year int
+	if civil.Year < 1 {
+		// for dates BC convert astronomical year to civil
+		year = civil.Year - 1
+	} else {
+		year = civil.Year
+	}
+	i, f := math.Modf(civil.Day)
+	day := int(i)
+	hour, min, sec := mathutils.Hms(f * 24)
+	nanos := int(mathutils.Frac(sec) * 1e9)
+	date := time.Date(year, time.Month(civil.Month), day, hour, min, int(sec), nanos, time.UTC)
+	return date.Format(time.RFC3339)
 }

@@ -1,5 +1,6 @@
-// Calculates the effects of nutation on the ecliptic longitude, dpsi, and
-// on the obliquity of the ecliptic, deps with accuracy of about 1 arcsecond.
+// Calculates obliquity of the ecliptic and the effects of nutation on the ecliptic longitude,
+// dpsi, and on the obliquity of the ecliptic, deps with accuracy of about 1 arcsecond.
+//
 // Source: P.Duffett-Smith, "Astronomy with Your PC", 2 edition.
 package nutequ
 

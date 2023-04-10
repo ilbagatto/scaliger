@@ -58,9 +58,28 @@ func Degrees(rad float64) float64 {
 
 // Used with polinomial function for better accuracy.
 func Frac360(x float64) float64 {
-	f := Frac(x) * 360
-	if f < 360 {
-		f += 360
+	return Frac(x) * 360
+}
+
+// Converts decimal hours to sexagesimal values.
+//
+// If x is < 0, then the first non-zero return value will be negative.
+//
+//	Hms(-0.5) = 0, -30, 0.0
+func Hms(x float64) (hours int, minutes int, seconds float64) {
+	i, f := math.Modf(math.Abs(x))
+	hours = int(i)
+	i, f = math.Modf(f * 60)
+	minutes = int(i)
+	seconds = f * 60
+	if x < 0 {
+		if hours != 0 {
+			hours = -hours
+		} else if minutes != 0 {
+			minutes = -minutes
+		} else if seconds != 0 {
+			seconds = -seconds
+		}
 	}
-	return f
+	return hours, minutes, seconds
 }
