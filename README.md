@@ -68,7 +68,7 @@ dates as strings in RFC-3339 format:
 jd, error := DateStringToJulian("2000-02-01T11:46:00Z")
 ```
 ```go
-got := JulianToDateString(2438750.990277778) // returns date string
+got := JulianToDateString(2438750.990277778) // returns a date string
 ```
 This may be usefull for consiole applications (see the examples) and dynamic libraries
 called from applications written in other programming languages.
