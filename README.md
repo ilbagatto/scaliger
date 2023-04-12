@@ -7,6 +7,7 @@ classical scholar *Joseph Scaliger (1540-1609)*, who proposed the *Julian Period
   - [Quick Start](#quick-start)
   - [Usage](#usage)
     - [Julian Dates](#julian-dates)
+      - [Dates as strings](#dates-as-strings)
     - [Sidereal Time](#sidereal-time)
     - [Universal and Terrestial Dynamic Time](#universal-and-terrestial-dynamic-time)
     - [Obliquity of the ecliptic](#obliquity-of-the-ecliptic)
@@ -57,6 +58,21 @@ type CivilDate struct {
 ```go
 date := JulianToCivil(2455197.5) // CivilDate{Year: 2010, Month: 1, Day: 1.0}
 ```
+
+#### Dates as strings
+
+Both the conversion functions have their conterparts accepting and receiving
+dates as strings in RFC-3339 format:
+
+```go
+jd, error := DateStringToJulian("2000-02-01T11:46:00Z")
+```
+```go
+got := JulianToDateString(2438750.990277778) // returns date string
+```
+This may be usefull for consiole applications (see the examples) and dynamic libraries
+called from applications written in other programming languages.
+
 
 Other utilitity functions from the package are mostly used internally.
 
