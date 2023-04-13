@@ -42,7 +42,7 @@ which is the number of days elapsed since mean UT noon of January 1st 4713 BC.
 
 ```go
 date := CivilDate{Year: 837, Month: 4, Day: 10.3}
-got := CivilToJulian(date) // 2026871.8
+jd := CivilToJulian(date) // 2026871.8
 ```
 The calendar date is represented by `CivilDate` structure.
 
