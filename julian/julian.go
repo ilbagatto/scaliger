@@ -2,7 +2,6 @@
 // Julian date (JD) is the number of days elapsed since mean UT noon of
 // January 1st 4713 BC. This system of time measurement is widely adopted by
 // the astronomers.
-
 package julian
 
 import (
@@ -15,7 +14,7 @@ import (
 // Seconds per day
 const SEC_PER_DAY = 24 * 60 * 60
 
-// Number of ays in a second
+// Number of days in a second
 const DAYS_PER_SEC = 1.0 / SEC_PER_DAY
 
 // Days per century
