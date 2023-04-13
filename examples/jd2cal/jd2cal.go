@@ -33,6 +33,6 @@ func main() {
 	}
 
 	dateStr := julian.JulianToDateString(jd)
-	fmt.Printf("%s\n", dateStr)
+	fmt.Println(dateStr)
 	os.Exit(0)
 }
