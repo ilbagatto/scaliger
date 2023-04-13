@@ -151,7 +151,7 @@ jde := jd + dt / 86400 // Dynamic time.
 
 To calculate *Mean Obliquity*, angle which the ecliptic makes with the mean equator,
 use `MeanObliquity(jd float64) float64` function. For better accuracy correct JD for *TDT*
-(see [Dynamic Time](#dynamic-time--deltat-package)).
+(see [Dynamic Time](#universal-and-terrestial-dynamic-time)).
 
 The formula used should give an accurate results (less than 1 srcsecond) within 2000
 years around the epoch *J2000.0* (see *J.Meeus, Astronomical Algorithms, 2d edition, p.147*).
