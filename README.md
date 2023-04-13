@@ -1,3 +1,5 @@
+[![Go Reference](https://pkg.go.dev/badge/github.com/skrushinsky/scaliger.svg)](https://pkg.go.dev/github.com/skrushinsky/scaliger)
+
 # Scaliger
 
 Library of date/time manipulation routines for practical astronomy. It is named in honor of the prominent
