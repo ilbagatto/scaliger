@@ -13,6 +13,7 @@ classical scholar *Joseph Scaliger (1540-1609)*, who proposed the *Julian Period
     - [Obliquity of the ecliptic](#obliquity-of-the-ecliptic)
     - [Nutation](#nutation)
     - [Mathematical utilities](#mathematical-utilities)
+    - [Examples](#examples)
   - [Caveats](#caveats)
     - [Civil vs. Astronomical year](#civil-vs-astronomical-year)
     - [Zero day](#zero-day)
@@ -65,10 +66,10 @@ Both the conversion functions have their conterparts accepting and receiving
 dates as strings in RFC-3339 format:
 
 ```go
-jd, error := DateStringToJulian("2000-02-01T11:46:00Z")
+jd, error := DateStringToJulian("2023-04-13T06:00:00Z") // 2460047.86458333
 ```
 ```go
-date_string := JulianToDateString(2438750.990277778)
+date_string := JulianToDateString(2460047.86458333) // 2023-04-13T06:00:00Z
 ```
 This may be usefull for consiole applications (see the examples) and dynamic libraries
 called from applications written in other programming languages.
@@ -177,6 +178,10 @@ is the *nutation in obliquity*.
 * `Frac360(x float64) float64` reduces arc-degrees, much like `ReduceHours`, used with polinomial function for better accuracy.
 
 Please, see the [API docs](https://pkg.go.dev/github.com/skrushinsky/scaliger) for details.
+
+### Examples
+
+`examples/` directory contains contains examples of the library usage. They will be extended over time.
 
 ## Caveats
 

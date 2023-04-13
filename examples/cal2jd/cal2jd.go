@@ -19,7 +19,7 @@ func main() {
 
 	jd, error := julian.DateStringToJulian(dateStr)
 	if error != nil {
-		fmt.Printf("Invalid date: %s\n. Please, use format: y-mm-ddThh:mm:ssZ ", dateStr)
+		fmt.Printf("Invalid date: %s\n. Please, use format: y-mm-ddThh:mm:ssZ", dateStr)
 		os.Exit(1)
 	} else {
 		fmt.Printf("%.8f\n", jd)
