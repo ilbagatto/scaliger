@@ -1,3 +1,10 @@
+// Converts Julian date to civil date.
+// Usage:
+//
+//	jd2cal JD
+//
+// JD is a julian date, number of days elapsed since mean UT noon
+// of January 1st 4713 BC. e.g. 2460047.86458333
 package main
 
 import (

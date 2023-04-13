@@ -1,3 +1,9 @@
+// Converts civil date to Julian date.
+// Usage:
+//
+//	cal2jd DATE
+//
+// DATE is a civil date in RFC3339 format, e.g. 2023-04-13T06:00:00Z
 package main
 
 import (
