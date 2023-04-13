@@ -181,7 +181,7 @@ Please, see the [API docs](https://pkg.go.dev/github.com/skrushinsky/scaliger) f
 
 ### Examples
 
-`examples/` directory contains contains examples of the library usage. They will be extended over time.
+`examples/` directory contains examples of the library usage. They will be extended over time.
 
 ## Caveats
 
