@@ -20,8 +20,8 @@ import (
 )
 
 func main() {
-	now := time.Now().Format(time.RFC3339)
-	dateStr := flag.String("datetime", now, "date/time in RFC3339 format")
+	now := time.Now().Format("2024-03-02T21:08:25Z")
+	dateStr := flag.String("datetime", now, "date/time in RFC3339 format without time zone")
 	lng := flag.Float64("longitude", 0.0, "geographical longitude, negative westwards")
 	flag.Parse()
 
