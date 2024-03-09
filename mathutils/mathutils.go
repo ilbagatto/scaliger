@@ -5,6 +5,7 @@ import "math"
 
 const _DEG_RAD = math.Pi / 180
 const _RAD_DEG = 180 / math.Pi
+const _PI2 = math.Pi * 2
 
 // Compares two floats with a given precision.
 func AlmostEqual(a, b, threshold float64) bool {
@@ -22,13 +23,27 @@ func Frac(x float64) float64 {
 	return f
 }
 
+func ToRange(x float64, r float64) float64 {
+	z := math.Mod(x, r)
+	if z < 0 {
+		return z + r
+	}
+	return z
+}
+
 // Reduces hours to range 0 >= x < 24
 func ReduceHours(hours float64) float64 {
-	x := math.Mod(hours, 24)
-	if x < 0 {
-		return x + 24
-	}
-	return x
+	return ToRange(hours, 24)
+}
+
+// Reduces arc-degrees to range 0 >= x < 360
+func ReduceDeg(deg float64) float64 {
+	return ToRange(deg, 360)
+}
+
+// Reduces radians to range 0 >= x < 2 * pi
+func ReduceRad(rad float64) float64 {
+	return ToRange(rad, _PI2)
 }
 
 // Calculates polynome:

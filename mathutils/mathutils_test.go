@@ -38,6 +38,30 @@ func TestReduceHoursNegative(t *testing.T) {
 	}
 }
 
+func TestReduceDegPositive(t *testing.T) {
+	if !AlmostEqual(ReduceDeg(324070.45), 70.45, 1e-6) {
+		t.Errorf("324070.45 should be reduced to 70.45")
+	}
+}
+
+func TestReduceDegNegative(t *testing.T) {
+	if !AlmostEqual(ReduceHours(-700), 20, 1e-6) {
+		t.Errorf("-700 should be reduced to 20")
+	}
+}
+
+func TestReduceRadPositive(t *testing.T) {
+	if !AlmostEqual(ReduceRad(12.89), 0.323629385640829, 1e-6) {
+		t.Errorf("12.89 should be reduced to 0.323629385640829")
+	}
+}
+
+func TestReduceRadNegative(t *testing.T) {
+	if !AlmostEqual(ReduceRad(-12.89), 5.95955592153876, 1e-6) {
+		t.Errorf("-12.89 should be reduced to 5.95955592153876")
+	}
+}
+
 func TestShortPolynome(t *testing.T) {
 	got := Polynome(10, 1, 2, 3)
 	exp := 321.0
