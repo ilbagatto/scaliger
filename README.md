@@ -174,6 +174,8 @@ is the *nutation in obliquity*.
 * `AlmostEqual(a, b, threshold float64)` compares two floating point numbers with a given precision.
 * `Frac(x float64) float64` fractional part of a number.
 * `ReduceHours(hours float64) float64` reduces hours to range `0 >= x < 24`.
+* `ReduceDeg(deg float64) float64` reduces arc-degrees to range `0 >= x < 360`.
+* `ReduceRad(rad float64) float64` reduces radians to range `0 >= x < PI * 2`.
 * `Polynome(t float64, terms ...float64) float64` calculates polynome: `a1 + a2*t + a3*t*t + a4*t*t*t...`.
 * `Radians(deg float64) float64` converts arc-degrees to radians.
 * `Degrees(rad float64) float64` converts radians to arc-degrees.
