@@ -54,10 +54,13 @@ func ReduceRad(rad float64) float64 {
 // terms is a list of terms
 func Polynome(t float64, terms ...float64) float64 {
 	res := 0.0
-	for i, k := range terms {
-		p := math.Pow(t, float64(i))
-		res += k * p
+	power := 1.0 // t^0
+
+	for _, k := range terms {
+		res += k * power
+		power *= t
 	}
+
 	return res
 }
 
